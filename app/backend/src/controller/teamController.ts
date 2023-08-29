@@ -6,6 +6,11 @@ export default class TeamsController {
     const { status, data } = await teamsService.getAllTeams();
     return response.status(status).json(data);
   }
+
+  static async getOneTeam(request: Request, response: Response): Promise<Response> {
+    const { status, data } = await teamsService.getOneTeam(+request.params.id);
+    return response.status(status).json(data);
+  }
 }
 // async function findAllTeams(request: Request, response: Response): Promise<Response> {
 //   const { status, data } = await teamsService.findAllTeams();
