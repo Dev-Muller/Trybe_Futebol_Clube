@@ -13,4 +13,9 @@ const mockTeams = [
   },
 ];
 
-export default mockTeams;
+const oneTeam = {
+  "id": 5,
+  "teamName": "Cruzeiro"
+};
+
+export default { mockTeams, oneTeam };
