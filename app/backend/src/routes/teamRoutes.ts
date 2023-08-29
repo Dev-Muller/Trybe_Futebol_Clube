@@ -3,8 +3,8 @@ import teamController from '../controller/teamController';
 
 const teamRoutes = Router();
 
-teamRoutes.get('/', teamController.getAllTeams);
+teamRoutes.get('/teams', teamController.getAllTeams);
 
-teamRoutes.get('/:id', teamController.getOneTeam);
+teamRoutes.get('/teams/:id', teamController.getOneTeam);
 
 export default teamRoutes;

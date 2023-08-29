@@ -1,13 +1,5 @@
 import Team from '../database/models/teamsModel';
 import { Status } from '../types/status';
-// import ITeams from '../Interfaces/Teams';
-
-// async function findAllTeams(): Promise<Status> {
-//   const allTeams = await Team.findAll();
-//   console.log('log allTeams:', allTeams);
-
-//   return { status: 200, data: allTeams };
-// }
 
 export default class TeamService {
   // constructor(
