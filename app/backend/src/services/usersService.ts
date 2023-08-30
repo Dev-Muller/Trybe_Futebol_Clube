@@ -6,14 +6,21 @@ import token from '../utils/jwt';
 export default class UserServices {
   static async userLogin(email: string, password: string): Promise<Status> {
     const loginUser = await User.findOne({ where: { email } });
-    // console.log(loginUser);
 
     if (!loginUser || !bcrypt.compareSync(password, loginUser.password)) {
-      // console.log('testa***********************');
       return { status: 401, data: { message: 'Invalid email or password' } };
     }
 
     const userToken = token.generateToken({ email });
     return { status: 200, data: { token: userToken } };
+  }
+
+  static async userRole(email: string): Promise<Status> {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return { status: 403, data: {} };
+    }
+    return { status: 200, data: { role: user.role } };
   }
 }
