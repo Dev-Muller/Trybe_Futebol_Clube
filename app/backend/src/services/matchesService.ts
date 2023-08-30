@@ -12,4 +12,19 @@ export default class MatchService {
     });
     return { status: 200, data: matches };
   }
+
+  static async matchInProgress(inProgress: string): Promise<Status> {
+    const matches = await Match.findAll({
+      include: [{ model: Team, as: 'homeTeam', attributes: { exclude: ['id'] } },
+        { model: Team, as: 'awayTeam', attributes: { exclude: ['id'] } }],
+    });
+    // console.log('*******', matches);
+
+    if (inProgress === 'true') {
+      const filteredMatches = matches.filter((match) => match.dataValues.inProgress === true);
+      return { status: 200, data: filteredMatches };
+    }
+    const filteredMatches = matches.filter((match) => match.dataValues.inProgress === false);
+    return { status: 200, data: filteredMatches };
+  }
 }
