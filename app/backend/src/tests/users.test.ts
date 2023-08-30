@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import { App } from '../../src/app';
 import User from '../database/models/usersModel'
-import { userMock, userTokenMock } from './mocks/user.mocks';
+import { tokenPayloadMock, userMock, userTokenMock } from './mocks/user.mocks';
 import token from '../utils/jwt';
 
 chai.use(chaiHttp);
@@ -41,4 +41,11 @@ describe('users Test', function() {
 
     expect(status).to.equal(400);
   });
+  it('should tell what is the role of the user', async function() {
+    sinon.stub(User, 'findOne').resolves(userMock as any);
+    sinon.stub(token, 'verifyToken').returns(tokenPayloadMock)
+    const { status } = (await chai.request(app).get('/login/role').set('authorization', 'string token'));
+
+    expect(status).to.equal(200);
+  })
 });
