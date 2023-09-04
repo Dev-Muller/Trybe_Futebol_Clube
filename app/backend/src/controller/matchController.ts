@@ -13,9 +13,8 @@ export default class MatchesController {
     return response.status(status).json(data);
   }
 
-  // static async matchInProgress(request: Request, response: Response): Promise<Response> {
-  //   const variavel = request.query.inProgress;
-  //   const { status, data } = await MatchService.matchInProgress(variavel as string);
-  //   return response.status(status).json(data);
-  // }
+  static async finishMatch(request: Request, response: Response): Promise<Response> {
+    const { status, data } = await MatchService.finishMatch(request.params.id);
+    return response.status(status).json(data);
+  }
 }

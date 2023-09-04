@@ -27,4 +27,9 @@ export default class MatchService {
     const filteredMatches = matches.filter((match) => match.dataValues.inProgress === false);
     return { status: 200, data: filteredMatches };
   }
+
+  static async finishMatch(id: string): Promise<Status> {
+    await Match.update({ inProgress: false }, { where: { id } });
+    return { status: 200, data: { message: 'Finished' } };
+  }
 }
