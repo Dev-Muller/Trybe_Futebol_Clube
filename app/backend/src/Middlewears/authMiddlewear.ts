@@ -9,8 +9,8 @@ export default class UserAuth {
     }
     try {
       const newToken = token.includes('Bearer') ? token.replace('Bearer', '') : token;
-      console.log('****', newToken.length);
-      console.log('------', newToken.trim().length);
+      // console.log('****', newToken.length);
+      // console.log('------', newToken.trim().length);
 
       const verify = JWT.verifyToken(newToken.trim());
       req.body.user = verify;

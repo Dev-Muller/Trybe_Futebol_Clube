@@ -32,4 +32,14 @@ export default class MatchService {
     await Match.update({ inProgress: false }, { where: { id } });
     return { status: 200, data: { message: 'Finished' } };
   }
+
+  static async updateGoals(
+    id: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<Status> {
+    await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    const updatedMatch = await Match.findByPk(id);
+    return { status: 200, data: { updatedMatch } };
+  }
 }

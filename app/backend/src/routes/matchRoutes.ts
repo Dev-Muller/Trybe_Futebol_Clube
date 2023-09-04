@@ -8,4 +8,6 @@ matchRoutes.get('/matches', MatchesController.getAllMatches);
 
 matchRoutes.patch('/matches/:id/finish', UserAuth.validateToken, MatchesController.finishMatch);
 
+matchRoutes.patch('/matches/:id', UserAuth.validateToken, MatchesController.updateGoals);
+
 export default matchRoutes;
