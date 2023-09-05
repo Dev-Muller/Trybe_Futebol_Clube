@@ -42,4 +42,21 @@ export default class MatchService {
     const updatedMatch = await Match.findByPk(id);
     return { status: 200, data: { updatedMatch } };
   }
+
+  static async createNewMatch(
+    homeTeamId: number,
+    awayTeamId: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<Status> {
+    const createNewMatch = await Match.create({
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true,
+    });
+    // console.log(createNewMatch.dataValues);
+    return { status: 200, data: createNewMatch.dataValues };
+  }
 }

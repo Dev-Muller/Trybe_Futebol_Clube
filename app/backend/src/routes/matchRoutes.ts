@@ -10,4 +10,6 @@ matchRoutes.patch('/matches/:id/finish', UserAuth.validateToken, MatchesControll
 
 matchRoutes.patch('/matches/:id', UserAuth.validateToken, MatchesController.updateGoals);
 
+matchRoutes.post('/matches', UserAuth.validateToken, MatchesController.createNewMatch);
+
 export default matchRoutes;

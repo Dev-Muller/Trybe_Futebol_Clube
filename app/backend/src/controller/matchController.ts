@@ -21,10 +21,26 @@ export default class MatchesController {
   static async updateGoals(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const { homeTeamGoals, awayTeamGoals } = request.body;
-    console.log('id', id);
-    console.log('goalsHome', homeTeamGoals);
-    console.log('goalsAway', awayTeamGoals);
+    // console.log('id', id);
+    // console.log('goalsHome', homeTeamGoals);
+    // console.log('goalsAway', awayTeamGoals);
     const { status, data } = await MatchService.updateGoals(+id, homeTeamGoals, awayTeamGoals);
+    return response.status(status).json(data);
+  }
+
+  static async createNewMatch(request: Request, response: Response): Promise<Response> {
+    const {
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+    } = request.body;
+    const { status, data } = await MatchService.createNewMatch(
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+    );
     return response.status(status).json(data);
   }
 }
