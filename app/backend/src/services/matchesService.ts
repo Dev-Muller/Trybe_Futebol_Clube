@@ -56,7 +56,7 @@ export default class MatchService {
       awayTeamGoals,
       inProgress: true,
     });
-    // console.log(createNewMatch.dataValues);
-    return { status: 200, data: createNewMatch.dataValues };
+    console.log(createNewMatch);
+    return { status: 201, data: createNewMatch.dataValues };
   }
 }
