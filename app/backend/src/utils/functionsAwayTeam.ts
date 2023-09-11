@@ -16,21 +16,21 @@ const score = {
 function updatingVictory(homeGoals: number, awayGoals: number) {
   score.totalPoints += 3;
   score.totalVictories += 1;
-  score.goalsFavor += homeGoals;
-  score.goalsOwn += awayGoals;
+  score.goalsOwn += homeGoals;
+  score.goalsFavor += awayGoals;
 }
 
 function updatingLosses(homeGoals: number, awayGoals: number) {
   score.totalLosses += 1;
-  score.goalsFavor += homeGoals;
-  score.goalsOwn += awayGoals;
+  score.goalsOwn += homeGoals;
+  score.goalsFavor += awayGoals;
 }
 
 function updatingDraws(homeGoals: number, awayGoals: number) {
   score.totalPoints += 1;
   score.totalDraws += 1;
-  score.goalsFavor += homeGoals;
-  score.goalsOwn += awayGoals;
+  score.goalsOwn += homeGoals;
+  score.goalsFavor += awayGoals;
 }
 
 // function updateEfficiency() {
@@ -40,10 +40,10 @@ function updatingDraws(homeGoals: number, awayGoals: number) {
 
 function updateAll(matches: IMatches[]) {
   matches.forEach((match: IMatches) => {
-    if (match.homeTeamGoals > match.awayTeamGoals) {
+    if (match.homeTeamGoals < match.awayTeamGoals) {
       return updatingVictory(match.homeTeamGoals, match.awayTeamGoals);
     }
-    if (match.homeTeamGoals < match.awayTeamGoals) {
+    if (match.homeTeamGoals > match.awayTeamGoals) {
       return updatingLosses(match.homeTeamGoals, match.awayTeamGoals);
     }
     if (match.homeTeamGoals === match.awayTeamGoals) {
@@ -52,7 +52,7 @@ function updateAll(matches: IMatches[]) {
   });
 }
 
-export default function getTeamScores(name: string, scores: IMatches[]) {
+export default function getAwayScores(name: string, scores: IMatches[]) {
   score.name = name;
   score.totalGames += 1;
   // updateEfficiency();
