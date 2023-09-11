@@ -14,6 +14,10 @@ const { app } = new App();
 const { expect } = chai;
 
 describe('users Test', function() {
+  beforeEach(() => {
+    sinon.restore();
+  });
+
   it('should login a user', async function() {
     sinon.stub(User, 'findOne').resolves(userMock as any);
     sinon.stub(token, 'generateToken').returns(userTokenMock)
@@ -26,15 +30,15 @@ describe('users Test', function() {
   });
 
   it('should return a error for email', async function() {
-    sinon.stub(User, 'findOne').resolves(userMock as any);
+    sinon.stub(User, 'findOne').resolves();
     const { status } = await chai.request(app).post('/login').send({
       password: 'secret_admin',
     });
 
     expect(status).to.equal(400);
   });
-  it('should login a user', async function() {
-    sinon.stub(User, 'findOne').resolves(userMock as any);
+  it('should return a unonexistent password', async function() {
+    sinon.stub(User, 'findOne').resolves();
     const { status } = await chai.request(app).post('/login').send({
       email: 'admin@admin.com',
     });
