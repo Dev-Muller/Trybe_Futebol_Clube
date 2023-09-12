@@ -30,4 +30,11 @@ describe('Teams Test', function() {
     expect(status).to.equal(200);
     expect(body).to.deep.equal(oneTeam);
   })
+
+  it('should not return one team', async function () {
+    sinon.stub(Team, 'findByPk').resolves();
+    const { status, body } = await chai.request(app).get('/teams/99');
+
+    expect(status).to.equal(404);
+  })
 });

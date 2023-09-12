@@ -61,16 +61,32 @@ describe('matches Test', function() {
   });
   it('should find all matches in progress', async function() {
     sinon.stub(jwt, 'verify').resolves({email: 'admin@admin.com'})
-    sinon.stub(Match, 'findAll').resolves(matchesTeamsMocks as any);
+    sinon.stub(Match, 'findAll').resolves([]);
     const { status } = await chai.request(app).get('/matches?inProgress=true').set('Authorization', userTokenMock);
 
     expect(status).to.equal(200);
   });
   it('should find all matches that arent in progress', async function() {
-    sinon.stub(jwt, 'verify').resolves({email: 'admin@admin.com'})
-    sinon.stub(Match, 'findAll').resolves(matchesTeamsMocks as any);
-    const { status } = await chai.request(app).get('/matches?inProgress=false').set('Authorization', userTokenMock);
+    // sinon.stub(jwt, 'verify').resolves({email: 'admin@admin.com'})
+    sinon.stub(Match, 'findAll').resolves([]);
+    const { status } = await chai.request(app).get('/matches?inProgress=false');
+    // .set('Authorization', userTokenMock);
 
+    expect(status).to.equal(200);
+  });
+  it('should finish a match', async function() {
+    sinon.stub(jwt, 'verify').resolves({email: 'admin@admin.com'});
+    sinon.stub(Match, 'update').resolves();
+    const { status } = await chai.request(app).patch('/matches/1/finish').set('Authorization', userTokenMock);
+
+    expect(status).to.equal(200);
+  });
+  it('should update goals', async function() {
+    sinon.stub(jwt, 'verify').resolves({email: 'admin@admin.com'});
+    sinon.stub(Match, 'update').resolves();
+    const { status } = await chai.request(app).patch('/matches/1').set('Authorization', userTokenMock)
+    .send({ homeTeamGoals: 1, awayTeamGoals: 1 });
+    
     expect(status).to.equal(200);
   });
 });

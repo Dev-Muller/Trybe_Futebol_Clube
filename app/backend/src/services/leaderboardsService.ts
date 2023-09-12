@@ -12,12 +12,17 @@ export default class LeaderboardService {
       const matches = await Match.findAll({ where: { inProgress: false, homeTeamId: team.id } });
       const mapMatches = matches.map((match) => getTeamScores(team.teamName, [match]));
       const index = mapMatches[mapMatches.length - 1];
-      console.log(index.totalGames);
-
+      // console.log(index.totalGames);
       return { ...index };
     });
     const data = await Promise.all(mapTeams);
-    return { status: 200, data };
+    const variavel = data.sort((a, b) => {
+      if (a.totalPoints !== b.totalPoints) return b.totalPoints - a.totalPoints;
+      if (a.totalVictories !== b.totalVictories) return b.totalVictories - a.totalVictories;
+      if (a.goalsBalance !== b.goalsBalance) return b.goalsBalance - a.goalsBalance;
+      return b.goalsFavor - a.goalsFavor;
+    });
+    return { status: 200, data: variavel };
   }
 
   static async getAwayTeams(): Promise<Status> {
@@ -27,7 +32,6 @@ export default class LeaderboardService {
       const matches = await Match.findAll({ where: { inProgress: false, awayTeamId: team.id } });
       const mapMatches = matches.map((match) => getAwayScores(team.teamName, [match]));
       const index = mapMatches[mapMatches.length - 1];
-      // console.log(index.totalGames);
       return { ...index };
     });
     const data = await Promise.all(mapTeams);
