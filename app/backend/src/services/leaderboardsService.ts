@@ -35,6 +35,12 @@ export default class LeaderboardService {
       return { ...index };
     });
     const data = await Promise.all(mapTeams);
-    return { status: 200, data };
+    const variavel = data.sort((a, b) => {
+      if (b.totalPoints !== a.totalPoints) return b.totalPoints - a.totalPoints;
+      if (b.totalVictories !== a.totalVictories) return b.totalVictories - a.totalVictories;
+      if (b.goalsBalance !== a.goalsBalance) return b.goalsBalance - a.goalsBalance;
+      return b.goalsFavor - a.goalsFavor;
+    });
+    return { status: 200, data: variavel };
   }
 }
