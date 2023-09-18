@@ -11,4 +11,9 @@ export default class LeaderboardController {
     const { status, data } = await LeaderboardsService.getAwayTeams();
     return response.status(status).json(data);
   }
+
+  static async leaderboard(request: Request, response: Response): Promise<Response> {
+    const { status, data } = await LeaderboardsService.leaderboard();
+    return response.status(status).json(data);
+  }
 }

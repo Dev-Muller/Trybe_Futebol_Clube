@@ -3,6 +3,8 @@ import Match from '../database/models/matchesModel';
 import { Status } from '../types/status';
 import getTeamScores from '../utils/functions';
 import getAwayScores from '../utils/functionsAwayTeam';
+import leaderboardTeams from '../utils/leaderboard';
+import sortFunction from '../utils/order';
 
 export default class LeaderboardService {
   static async getHomeTeams(): Promise<Status> {
@@ -42,5 +44,17 @@ export default class LeaderboardService {
       return b.goalsFavor - a.goalsFavor;
     });
     return { status: 200, data: variavel };
+  }
+
+  static async leaderboard(): Promise<Status> {
+    const homeTeams = await this.getHomeTeams();
+    const awayTeams = await this.getAwayTeams();
+    const sumTeams = leaderboardTeams(awayTeams.data as any, homeTeams.data as any);
+    // console.log(sumTeams);
+    // const data = await Promise.all(sumTeams);
+    const variavel = sortFunction(sumTeams);
+    console.log(variavel);
+
+    return { status: 200, data: variavel as unknown as object[] };
   }
 }

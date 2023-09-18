@@ -1,4 +1,4 @@
 export type Status = {
   status: number;
-  data: object;
+  data: object | object[];
 };
