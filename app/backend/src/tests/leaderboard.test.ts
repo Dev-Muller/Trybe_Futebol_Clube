@@ -6,6 +6,8 @@ import chaiHttp = require('chai-http');
 import { App } from '../../src/app';
 // import token from '../utils/jwt';
 import Match from '../database/models/matchesModel';
+import getTeamScores from '../utils/functions';
+import getAwayScores from '../utils/functionsAwayTeam';
 
 chai.use(chaiHttp);
 
@@ -29,5 +31,19 @@ describe('leaderboard Test', function() {
     const { status } = await chai.request(app).get('/leaderboard/away');
 
     expect(status).to.equal(200);
+  });
+  it('should find all teams leaderboard', async () => {
+    sinon.stub(Match, 'findAll').resolves([]);
+    const { status } = await chai.request(app).get('/leaderboard');
+
+    expect(status).to.equal(200);
+  });
+  it('should use unit test for getTeamsScores', async () => {
+    const request = getTeamScores('test', []);
+    expect(request).to.be.an('object');
+  });
+  it('should use unit test for getAwayScores', async () => {
+    const request = getAwayScores('test', []);
+    expect(request).to.be.an('object');
   });
 });

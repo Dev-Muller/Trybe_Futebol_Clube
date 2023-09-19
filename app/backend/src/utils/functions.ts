@@ -1,6 +1,6 @@
 // import IScore from '../Interfaces/Score';
 import IMatches from '../Interfaces/Matches';
-import newScore from '../Interfaces/newInterface';
+// import newScore from '../Interfaces/newInterface';
 
 const score = {
   name: '',
@@ -67,20 +67,20 @@ function resetScore() {
   score.efficiency = 0;
 }
 
-export function sortScores(scores: newScore[]) {
-  const objeto = scores.sort((a, b) => {
-    if (a.totalPoints > b.totalPoints) {
-      console.log('************************************');
-      return -1;
-    }
-    if (a.totalPoints < b.totalPoints) {
-      console.log('----------------------------------');
-      return 1;
-    }
-    return 0;
-  });
-  return objeto;
-}
+// export function sortScores(scores: newScore[]) {
+//   const objeto = scores.sort((a, b) => {
+//     if (a.totalPoints > b.totalPoints) {
+//       console.log('************************************');
+//       return -1;
+//     }
+//     if (a.totalPoints < b.totalPoints) {
+//       console.log('----------------------------------');
+//       return 1;
+//     }
+//     return 0;
+//   });
+//   return objeto;
+// }
 
 export default function getTeamScores(name: string, scores: IMatches[]) {
   if (name !== score.name) {
@@ -91,6 +91,6 @@ export default function getTeamScores(name: string, scores: IMatches[]) {
   updateAll(scores);
   updateEfficiency(score.totalPoints, score.totalGames);
   // console.log(score);
-  sortScores([score]);
+  // sortScores([score]);
   return score;
 }
