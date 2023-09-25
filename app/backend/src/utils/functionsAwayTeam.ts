@@ -94,3 +94,5 @@ export default function getAwayScores(name: string, scores: IMatches[]) {
   // sortScores([score]);
   return score;
 }
+
+export { updateAll, updatingVictory, updatingLosses, updatingDraws };

@@ -94,3 +94,5 @@ export default function getTeamScores(name: string, scores: IMatches[]) {
   // sortScores([score]);
   return score;
 }
+
+export { updatingVictory, updatingLosses, updatingDraws, updateEfficiency };

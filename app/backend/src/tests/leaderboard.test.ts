@@ -8,6 +8,8 @@ import { App } from '../../src/app';
 import Match from '../database/models/matchesModel';
 import getTeamScores from '../utils/functions';
 import getAwayScores from '../utils/functionsAwayTeam';
+import { updatingVictory, resetScore, updateAll, updateEfficiency, updatingDraws, updatingLosses } from '../utils/functions';
+// import { updatingVictory, resetScore, updateAll, updateEfficiency, updatingDraws, updatingLosses } from '../utils/functionsAwayTeam';
 
 chai.use(chaiHttp);
 
@@ -45,5 +47,14 @@ describe('leaderboard Test', function() {
   it('should use unit test for getAwayScores', async () => {
     const request = getAwayScores('test', []);
     expect(request).to.be.an('object');
+  });
+
+  it('unite test for others functions from home team leaderboard', async () => {
+    updatingVictory(9, 8)
+    updatingLosses(1, 2)
+    updatingDraws(1, 1)
+    updateAll([])
+    updateEfficiency(1, 1)
+    resetScore()
   });
 });
