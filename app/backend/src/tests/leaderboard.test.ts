@@ -8,7 +8,7 @@ import { App } from '../../src/app';
 import Match from '../database/models/matchesModel';
 import getTeamScores from '../utils/functions';
 import getAwayScores from '../utils/functionsAwayTeam';
-import { updatingVictory, resetScore, updateAll, updateEfficiency, updatingDraws, updatingLosses } from '../utils/functions';
+import { updatingVictory, updateEfficiency, updatingDraws, updatingLosses } from '../utils/functions';
 // import { updatingVictory, resetScore, updateAll, updateEfficiency, updatingDraws, updatingLosses } from '../utils/functionsAwayTeam';
 
 chai.use(chaiHttp);
@@ -53,8 +53,6 @@ describe('leaderboard Test', function() {
     updatingVictory(9, 8)
     updatingLosses(1, 2)
     updatingDraws(1, 1)
-    updateAll([])
     updateEfficiency(1, 1)
-    resetScore()
   });
 });
